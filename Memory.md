@@ -12,3 +12,5 @@ Key Benefit: Enables multitasking and running large applications with limited RA
 Concept: A memory management scheme that eliminates the need for contiguous allocation of physical memory.
 
 Mechanism: It divides logical memory into Pages and physical memory into Frames. A Page Table maps these two, allowing flexible and efficient memory usage.
+
+DRAM vs SRAM
