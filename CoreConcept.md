@@ -41,3 +41,14 @@ Example: When you press the 'A' key on a keyboard, the hardware generates an int
 - Binary Representation: All information—whether it is a number, a character, or a complex instruction—is represented in binary (0s and 1s).
 
 - The Von Neumann Bottleneck: Since instructions and data share the same bus, the CPU must wait for memory access, creating a performance limit in modern high-speed computing.
+
+6. Variety of Computing Environments
+The management strategy of an Operating System changes significantly depending on the infrastructure and the specific needs of the environment it operates in.
+
+- Traditional Computing: Standard PC or server environments, either standalone or connected via a basic network.
+
+- Mobile Computing: Environments for smartphones and tablets. The OS focuses on battery optimization, wireless connectivity (Bluetooth/Wi-Fi), and touch interface management.
+
+- Client-Server Computing: A centralized model where a dedicated server provides resources and multiple clients request them (e.g., Web browsers accessing a web server).
+
+- Peer-to-Peer (P2P) Computing: A decentralized model where all nodes (Peers) act as both clients and servers, exchanging resources directly without a central authority (e.g., AirDrop, BitTorrent).
