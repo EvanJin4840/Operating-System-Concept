@@ -83,3 +83,32 @@ Without PCB, resuming a preempted process would lose its execution state.
   (previously saved context exists)
 - New processes use **PCB initialization** (PC = start address, registers = 0)
 - **Context switching only occurs between processes with existing PCBs**
+
+### Logical Control Flow & Processes
+1. Definition of Logical Control Flow
+- A Logical Control Flow is a sequence of program counter (PC) values that correspond to the instructions executed by a process. Even though multiple processes share the same physical CPU, each process behaves as if it has exclusive use of the processor.
+
+2. Key Characteristics
+- Abstraction of CPU: It provides the illusion that the program is running continuously from start to finish without interruption.
+
+- Interleaving: In reality, the hardware "interleaves" these flows. The CPU executes a few instructions of Flow A, then switches to Flow B, then back to A.
+
+- Concurrency: Two flows are said to be concurrent if their execution times overlap.
+
+3. Relationship with "Process"
+* A Process is a classic abstraction in operating systems that provides two key illusions to the application:
+
+    1. Logical Control Flow: Provided by the OS through a mechanism called Context Switching.
+
+    2. Private Address Space: Provided by the OS through Virtual Memory.
+
+* Note: Therefore, Logical Control Flow is a dynamic execution concept belonging to a Process, rather than a static code structure.
+
+4. Exceptional Control Flow (ECF)
+The normal logical flow can be altered by sudden changes in the processor's state. This is known as Exceptional Control Flow, which occurs at all levels of a computer system:
+
+- Hardware Level: Interrupts (e.g., clicking a mouse, timer alerts).
+
+- OS Kernel Level: Context Switches (switching from Process A to Process B).
+
+- Software/User Level: Signals (e.g., pressing Ctrl+C to stop a process) or Exceptions (e.g., divide by zero).
