@@ -37,3 +37,37 @@
     * **Proportional Allocation**: Frames allocated based on process size.
 * **Global vs. Local Replacement**: Global allows a process to take frames from others; Local restricts replacement to its own frames.
 * **NUMA**: In systems with non-uniform memory access, OS tries to allocate memory "close to" the CPU where the thread is running to minimize latency.
+
+# Virtual Memory - Advanced Topics
+
+## 1. Thrashing
+* **Definition**: A state where a process spends more time paging than executing.
+* **Cause**: Occurs when a process does not have "enough" frames, leading to a high page-fault rate and low CPU utilization.
+* **Locality Model**: Programs move from one locality (set of pages used together) to another.
+* **Working-Set Model**: 
+    * Based on locality using a working-set window ($\Delta$).
+    * Prevents thrashing by ensuring the system provides enough frames to satisfy the sum of all working sets.
+* **Page-Fault Frequency (PFF)**: A direct approach to control thrashing by establishing upper and lower bounds on the allowable page-fault rate.
+
+## 2. Kernel Memory Allocation
+* **Requirements**: Often requires physically contiguous memory for hardware interfaces or specific data structures.
+* **Buddy System**: 
+    * Allocates memory in units sized as powers of 2 (2KB, 4KB, 8KB, etc.).
+    * Advantage: Quickly coalesces unused adjacent chunks (buddies).
+    * Disadvantage: Can cause internal fragmentation.
+* **Slab Allocation**:
+    * Uses "caches" consisting of one or more "slabs" (contiguous pages).
+    * Each cache is populated with objects for specific kernel data structures (e.g., `task_struct`).
+    * Eliminates fragmentation and allows fast allocation/deallocation.
+
+## 3. Practical Considerations
+* **Prepaging**: Loading all or some of the pages a process will need before they are referenced to reduce initial page faults.
+* **Page Size**: Choosing a page size involves trade-offs:
+    * **Smaller pages**: Less fragmentation, better locality.
+    * **Larger pages**: Smaller page tables, better I/O efficiency, improved TLB reach.
+* **TLB Reach**: The total amount of memory accessible from the TLB ($TLB\ Entries \times Page\ Size$).
+* **Program Structure**: The way data is accessed significantly affects performance. For example, nested loops should match the memory layout of arrays (Row-major vs. Column-major) to minimize page faults.
+* **I/O Interlock**: Pages involved in I/O operations must be "locked" or "pinned" in memory so they aren't selected as victims for replacement.
+
+## 4. Linux Virtual Memory
+* **System Design**: The Linux VM system is highly sophisticated, focusing on scalability and efficient memory management (often cross-referenced with OSTEP materials).
